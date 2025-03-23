@@ -1,0 +1,46 @@
+.tabla {
+    width: 50vw;
+    border-collapse: separate;
+    border-spacing: 0; 
+    border: solid 1px var(--border-color);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tabla thead {
+    background-color: var(--primary-color); 
+    color: white; 
+    text-transform: uppercase;
+
+}
+
+.tabla th {
+    padding: 1rem;
+
+    border-bottom: 2px solid var(--border-color);
+}
+
+.tabla tbody tr:nth-child(even) {
+    background-color: var(--primary-color); 
+}
+
+.tabla td {
+    border: solid 1px var(--border-color);
+    padding: 1rem;
+    text-align: left;
+}
+
+.tabla tbody {
+    padding: 1rem;
+}
+
+.icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon{
+    cursor: pointer;
+}

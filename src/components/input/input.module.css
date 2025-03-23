@@ -1,0 +1,22 @@
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.inputContainer input{
+    padding: 5px 5px;
+    border-radius: 5px;
+    border: solid 1px var(--border-color);
+    font-size: 16px;
+    background-color: var(--secondary-color);
+}
+
+.inputContainer input:focus{
+    outline: 2px solid var(--border-color);
+}
+
+.inputContainer label{
+    font-size: 16px;
+
+}

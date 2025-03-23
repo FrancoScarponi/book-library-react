@@ -1,0 +1,7 @@
+.filterContainer{
+    display: flex;
+    height: 100%;
+    justify-content: start;
+    align-items: center;
+    gap: .6rem;
+}
