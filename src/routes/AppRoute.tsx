@@ -17,15 +17,12 @@ import { SignUp } from "../pages/SignUp/SignUp";
 import { Authors } from "../pages/Authors/Authors";
 import { Books } from "../pages/Books/Books";
 import { PublicRoutes } from "./PublicRoutes";
+import { Loader } from "../components/Loader/Loader";
 
-export const AppRoute = memo(() => {
-
-  console.log(" re-renderizado");
-  
+export const AppRoute = memo(() => {  
   const { user, loading } = useContext(AuthContext);
 
   useCheckAuth();
-  
   
   //para guardar la ultima ruta visitada por si refresca.
   const location = useLocation();
@@ -34,10 +31,9 @@ export const AppRoute = memo(() => {
       localStorage.setItem("lastPath", location.pathname);
     }
   }, [location.pathname, user]);
-  
 
   if (loading) {
-    return <p>Cargando...</p>;
+    return <Loader/>;
   }
   return (
     <Routes>

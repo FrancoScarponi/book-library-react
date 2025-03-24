@@ -25,3 +25,8 @@
     flex-direction: column;
     gap: 8px;
 }
+
+.btnEnviar{
+    max-height: 45px;
+    text-align: center;
+}

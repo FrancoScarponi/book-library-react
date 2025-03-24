@@ -4,22 +4,28 @@ import styles from "./login.module.css";
 import { login } from "../../services/authServices";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthProvider";
+import { Loader } from "../../components/Loader/Loader";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const {storeUser} = useContext(AuthContext)
-  const handleLogin = async (e:React.FormEvent) => {
+  const { storeUser } = useContext(AuthContext);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const userData = await login(email, password);
-      if (!userData) return
+      if (!userData) return;
       storeUser(userData);
       navigate("/dashboard");
-    } catch (error:any) {
+    } catch (error: any) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -40,7 +46,7 @@ const Login = () => {
             placeholder="*******"
           />
           {error && <div>{error}</div>}
-          <button onClick={e=>handleLogin(e)}>Iniciar</button>
+          <button className={styles.btnEnviar} onClick={(e) => handleLogin(e)}>{loading?<Loader/>:"Iniciar"}</button>
         </div>
       </form>
     </div>
