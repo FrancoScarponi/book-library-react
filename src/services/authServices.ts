@@ -1,9 +1,9 @@
 import axios from "axios"
 import { userResponse } from "../types/userTypes";
-
+const API_URL = import.meta.env.VITE_API_URL
 export const login = async (email:string,password:string)=>{
     try{
-        const response = await axios.post<userResponse>('http://api-crud-books.test/api/login',{
+        const response = await axios.post<userResponse>(`${API_URL}/login`,{
             email:email,
             password:password
         });
@@ -19,7 +19,7 @@ export const login = async (email:string,password:string)=>{
 export const checkAuth = async ()=>{
     try{
         const token = localStorage.getItem('token');
-        const response = await axios.get<userResponse>('http://api-crud-books.test/api/user',{
+        const response = await axios.get<userResponse>(`${API_URL}/user`,{
             headers: {Authorization: `Bearer ${token}`}
         });
         return response.data.data.user
@@ -32,7 +32,7 @@ export const checkAuth = async ()=>{
 
 export const signUp =async (name:string,email:string,password:string,confirmation:string)=>{
     try{
-        const response = await axios.post<userResponse>('http://api-crud-books.test/api/register',{
+        const response = await axios.post<userResponse>(`${API_URL}/register`,{
             name:name,
             email:email,
             password:password,

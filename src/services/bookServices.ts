@@ -1,12 +1,12 @@
 import axios from "axios";
 import { BookResponseType, BooksResponseType } from "../types/booksTypes";
-import { apiUrlBooks } from "./apiURL";
+const API_URL = import.meta.env.VITE_API_URL
 
 export const getBooks = async () => {
   try {
     const token = localStorage.getItem("token");
     if (!token) return;
-    const response = await axios.get<BooksResponseType>(apiUrlBooks, {
+    const response = await axios.get<BooksResponseType>(`${API_URL}/books`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -25,7 +25,7 @@ export const storeBook = async (
     const token = localStorage.getItem("token");
     if (!token) return null;
     const response = await axios.post<BookResponseType>(
-      apiUrlBooks,
+      `${API_URL}/books`,
       {
         name,
         description,
@@ -53,7 +53,7 @@ export const updateBook = async (
     const token = localStorage.getItem("token");
     if (!token) return null;
     const response = await axios.put<BookResponseType>(
-      `${apiUrlBooks}/${id}`,
+      `${API_URL}/books/${id}`,
       {
         name,
         description,
@@ -75,7 +75,7 @@ export const deleteBook = async (id: number) => {
     const token = localStorage.getItem("token");
     if (!token) return null;
     const response = await axios.delete(
-      `${apiUrlBooks}/${id}`,
+      `${API_URL}/books/${id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }

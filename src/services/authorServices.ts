@@ -1,12 +1,13 @@
 import axios from "axios";
 import { AuthorResponseType, AuthorsResponse } from "../types/authorsTypes";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const getAuthors = async (page=1, name="", email="") => {
   try {
     const token = localStorage.getItem("token");
     if (!token) return null;
     const response = await axios.get<AuthorsResponse>(
-      `http://api-crud-books.test/api/authors?page=${page}&name=${name}&email=${email}`,
+      `${API_URL}/authors?page=${page}&name=${name}&email=${email}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -29,7 +30,7 @@ export const storeAuthor = async (
     const token = localStorage.getItem("token");
     if (!token) return null;
     const response = await axios.post<AuthorResponseType>(
-      "http://api-crud-books.test/api/authors",
+      `${API_URL}/authors`,
       {
         name,
         email,
@@ -55,7 +56,7 @@ export const updateAuthor = async (
     const token = localStorage.getItem("token");
     if (!token) return null;
     const response = await axios.put<AuthorResponseType>(
-      `http://api-crud-books.test/api/authors/${id}`,
+      `${API_URL}/authors/${id}`,
       {
         name,
         email,
@@ -76,7 +77,7 @@ export const deleteAuthor = async (id: number) => {
     const token = localStorage.getItem("token");
     if (!token) return;
     const response = await axios.delete<{message:string}>(
-      `http://api-crud-books.test/api/authors/${id}`,
+      `${API_URL}/authors/${id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
