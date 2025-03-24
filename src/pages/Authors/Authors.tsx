@@ -15,18 +15,19 @@ export const Authors = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [pagination, setPagination] = useState<PaginationType | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filter,setFilter] = useState({name:"",email:""});
 
-  const loadAuthors = useCallback(async (nameFilter:string="",emailFilter:string="") => {
+  const loadAuthors = useCallback(async () => {
     try {
-      console.log("nombre ",nameFilter)
-      const response = await getAuthors(currentPage,nameFilter,emailFilter);
+      console.log("nombre ",filter.name)
+      const response = await getAuthors(currentPage,filter.name,filter.email);
       if (!response) return;
       setAuthors(response.authors);
       setPagination(response.pagination);
     } catch (error: any) {
       console.log(error.message);
     }
-  }, [currentPage]);
+  }, [currentPage, filter]);
 
   const handleDelete = useCallback(
     async (id: number) => {
@@ -58,7 +59,7 @@ export const Authors = () => {
     <div className={styles.principal}>
       <section className={styles.seccion}>
         <article className={styles.tableContainer}>
-          <AuthorFilter loadAuthors={loadAuthors} />
+          <AuthorFilter setFilter={setFilter} />
           <div className={styles.table}>
             <div>
               <Table

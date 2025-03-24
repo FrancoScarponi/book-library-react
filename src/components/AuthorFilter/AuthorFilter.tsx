@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { Input } from "../input/Input";
 import styles from "./authorfilter.module.css";
-interface Props {
-  loadAuthors: (name:string,email:string) => void;
+type filter = {
+  name:string,
+  email:string
 }
-export const AuthorFilter = ({ loadAuthors }: Props) => {
+interface Props {
+  setFilter:({}:filter)=>void;
+}
+export const AuthorFilter = ({ setFilter }: Props) => {
   const [nameFilter, setNameFilter] = useState("");
   const [emailFilter, setEmailFilter] = useState("");
 
@@ -21,7 +25,7 @@ export const AuthorFilter = ({ loadAuthors }: Props) => {
         placeholder="Email"
       />
       <div>
-        <button onClick={()=>loadAuthors(nameFilter,emailFilter)}>Filtrar</button>
+        <button onClick={()=>setFilter({name:nameFilter,email:emailFilter})}>Filtrar</button>
       </div>
     </div>
   );
